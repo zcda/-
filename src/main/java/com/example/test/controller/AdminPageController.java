@@ -26,7 +26,6 @@ public class AdminPageController {
     @Resource
     AdminService adminService;
 
-
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
         model.addAttribute("authUser",accountService.findUser(session));
