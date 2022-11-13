@@ -155,6 +155,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteMeetingRoomByRid(int rid) {
+        recordRepository.findAllByMeetingRoom(meetingRoomRepository.getById(rid)).forEach(record -> {
+            record.setMeetingRoom(null);
+            recordRepository.deleteById(record.getRecID());
+        });
+
         meetingRoomRepository.deleteById(rid);
     }
 
@@ -171,6 +176,10 @@ public class AdminServiceImpl implements AdminService {
             if(user.getGroup().contains(group)){
                 user.getGroup().remove(group);
             }
+        });
+        recordRepository.findAllByGroup(group).forEach(record -> {
+            record.setGroup(null);
+            recordRepository.deleteById(record.getRecID());
         });
        groupRepository.deleteById(gid);
     }

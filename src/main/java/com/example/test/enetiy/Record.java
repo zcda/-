@@ -18,11 +18,11 @@ public class Record {
     int RecID;
 
     @JoinColumn(name = "rid")
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     MeetingRoom meetingRoom;
 
     @JoinColumn(name = "gid")
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     Group group;
 
     @Column(name = "startTime")

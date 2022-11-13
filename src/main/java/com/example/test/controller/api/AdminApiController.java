@@ -30,9 +30,11 @@ public class AdminApiController {
 
 
     @RequestMapping("/deleteMeetingRoom/{rid}")
-    public String deleteMeetingRoom(@PathVariable int rid){
+    public String deleteMeetingRoom(@PathVariable int rid,Model model,HttpSession session){
+
         service.deleteMeetingRoomByRid(rid);
         return "redirect:/page/admin/index" ;
+
     }
 
     @RequestMapping("/deleteDevice/{did}")
