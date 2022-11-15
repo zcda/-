@@ -30,6 +30,8 @@ public class AdminPageController {
     public String index(HttpSession session, Model model) {
         model.addAttribute("authUser",accountService.findUser(session));
         model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+        model.addAttribute("meetingRoomsName",adminService.getAllMeetingRoomsName());
+        model.addAttribute("meetingRoomsCount",adminService.getAllMeetingRoomCounts());
         model.addAttribute("UserCount",adminService.UserCount());
         model.addAttribute("MeetingRoomCount",adminService.MeetingRoomCount());
         model.addAttribute("RecordCount",adminService.RecordCount());

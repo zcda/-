@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface AdminService {
     List<MeetingRoom> getAllMeetingRooms();
+    String[] getAllMeetingRoomsName();
+    int[] getAllMeetingRoomCounts();
     List<Group> getAllGroups();
     List<Device> getDevicesByRid(int rid);
     List<Users> getAllUser();

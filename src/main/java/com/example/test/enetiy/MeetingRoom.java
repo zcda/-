@@ -27,6 +27,9 @@ public class MeetingRoom {
     @Column(name = "Max_capacity",nullable = false)
     int max_capacity;
 
+    @Column(name = "count")
+    int count;
+
     @JoinColumn(name = "RID")
     @OneToMany(fetch = FetchType.LAZY,targetEntity = Device.class,cascade = CascadeType.ALL)
     List<Device> devices;
@@ -37,5 +40,6 @@ public class MeetingRoom {
         this.name = name;
         this.address = address;
         this.max_capacity = max_capacity;
+        count=0;
     }
 }

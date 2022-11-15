@@ -46,6 +46,26 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public String[] getAllMeetingRoomsName() {
+        List<MeetingRoom> meetingRooms=meetingRoomRepository.findAll();
+        String[] strings=new String[meetingRooms.size()];
+        for (int i = 0; i < strings.length; i++) {
+            strings[i]=meetingRooms.get(i).getName();
+        }
+        return strings;
+    }
+
+    @Override
+    public int[] getAllMeetingRoomCounts() {
+        List<MeetingRoom> meetingRooms=meetingRoomRepository.findAll();
+        int[] res=new int[meetingRooms.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i]=meetingRooms.get(i).getCount();
+        }
+        return res;
+    }
+
+    @Override
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
     }
@@ -297,7 +317,7 @@ public class AdminServiceImpl implements AdminService {
             recordRepository.save(new Record().setName(name).setEndTime(endTime).setStartTime(startTIme)
                     .setMeetingRoom(meetingRoomRepository.findById(rid).get()).setGroup(groupRepository.findById(gid).get())
             );
-
+            meetingRoomRepository.findById(rid).ifPresent(meetingRoom -> meetingRoom.setCount(meetingRoom.getCount()+1));
         }
         return flag.get();
     }
