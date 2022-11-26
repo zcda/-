@@ -80,6 +80,7 @@
                                         <tr>
                                             <th>预定 ID</th>
                                             <th>会议名</th>
+                                            <th>会议室名</th>
                                             <th>开始时间</th>
                                             <th>结束时间</th>
 
@@ -89,6 +90,7 @@
                                         <tbody th:each="record : ${records}">
                                         <tr>
                                             <td th:text="${record.getRecID()}">#JH2033</td>
+                                            <td th:text="${record.getName()}">#JH2033</td>
                                             <td th:text="${record.getMeetingRoom().getName()}">#JH2033</td>
                                             <td th:text="${record.getStartTime()}">#JH2033</td>
                                             <td th:text="${record.getEndTime()}">#JH2033</td>
