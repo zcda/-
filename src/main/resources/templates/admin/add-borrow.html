@@ -8,7 +8,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>SplashDash</title>
+    <title>添加预定信息</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -56,8 +56,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>添加借阅信息</h4>
-                                <p class="card-desc">请在下方输入 <code>组</code>会议室 <code>会议名</code>开始时间 结束时间</p>
+                                <h4 style="text-align:center">添加预定信息</h4>
+                                <p class="card-desc">请在下方输入 <code>组</code> <code>会议室</code> <code>会议名</code> <code>开始时间</code> <code>结束时间</code> </p>
                             </div>
                             <div class="card-body">
 
@@ -76,7 +76,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <label for="member-name" class="col-form-label">会议室</label>
                                                 <select class="select2 form-control" id="region1" name="rid">
-                                                    <optgroup label="需要选定的组">
+                                                    <optgroup label="需要选定的会议室">
                                                         <option th:text="${meetingRoom.getName()}" th:value="${meetingRoom.getRID()}" th:each="meetingRoom : ${meetingRooms}">Alaska</option>
                                                     </optgroup>
 
@@ -85,7 +85,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="member-name" class="col-form-label">会议名</label>
-                                                    <input class="form-control" type="text" placeholder="第一次会议"
+                                                    <input class="form-control" type="text" placeholder="请输入会议名"
                                                            id="member-name" name="name">
                                                 </div>
                                             </div>
@@ -105,7 +105,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group mb-0">
+                                        <div class="form-group mb-0" align="center">
                                             <button class="btn btn-primary" type="submit">提交</button>
                                         </div>
                                     </div>

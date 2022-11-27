@@ -65,7 +65,7 @@ public class AdminApiController {
         System.out.println(name+address+max_capacity);
         try{
         service.addMeetingRoom(name, address, Integer.parseInt(max_capacity));
-            return "redirect:/page/admin/index" ;
+            return "redirect:/page/admin/meetingrooms" ;
         }catch (Exception e){
             model.addAttribute("authUser",accountService.findUser(session));
             model.addAttribute("fail",true);
@@ -245,7 +245,7 @@ public class AdminApiController {
             return "admin/modify_meetingRoom";
         }
         try{service.modifyMeetingRoom((Integer)session.getAttribute("rid"),name,address,Integer.parseInt(max_capacity));
-            return "redirect:/page/admin/index";}
+            return "redirect:/page/admin/meetingrooms";}
         catch (Exception e){
             model.addAttribute("authUser",accountService.findUser(session));
             model.addAttribute("room",service.findRoomByRid((Integer)session.getAttribute("rid")));

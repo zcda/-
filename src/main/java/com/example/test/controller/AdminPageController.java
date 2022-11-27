@@ -38,6 +38,14 @@ public class AdminPageController {
         model.addAttribute("DeviceCount",adminService.DeviceCount());
         return "admin/index";
     }
+    @RequestMapping(value = "/meetingrooms",method =RequestMethod.GET)
+    public String meetingrooms(HttpSession session, Model model) {
+        model.addAttribute("authUser",accountService.findUser(session));
+        model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+        model.addAttribute("meetingRoomsName",adminService.getAllMeetingRoomsName());
+        model.addAttribute("meetingRoomsCount",adminService.getAllMeetingRoomCounts());
+        return "admin/meetingroom";
+    }
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public String users(HttpSession session, Model model){

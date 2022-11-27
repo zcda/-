@@ -8,7 +8,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>SplashDash</title>
+    <title>修改组信息</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -56,8 +56,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>添加书籍信息</h4>
-                                <p class="card-desc">请在下方输入 <code>组名</code>组的简介 </p>
+                                <h4 style="text-align:center">添加新的组信息</h4>
+                                <p class="card-desc">请在下方输入 <code>组名</code> <code>组的简介</code> </p>
                             </div>
                             <div class="card-body">
                                 <form class="separate-form" method="post" th:action="@{/api/admin/modify_group}">
@@ -75,14 +75,14 @@
                                                 <div class="form-group">
                                                     <label for="member-email" class="col-form-label">描述</label>
                                                     <input class="form-control" type="text"
-                                                           placeholder="新描述" id="member-email"
+                                                           placeholder="新的组描述" id="member-email"
                                                            th:value="${group.getDetails()}"
                                                            name="details">
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="form-group mb-0">
+                                        <div class="form-group mb-0" align="center">
                                             <button class="btn btn-primary" type="submit">提交</button>
                                         </div>
                                     </div>

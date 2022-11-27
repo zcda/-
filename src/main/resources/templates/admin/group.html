@@ -7,7 +7,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>SplashDash</title>
+    <title>组管理</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -29,7 +29,7 @@
 	  <div class="spinner">
 		<img th:src="@{/static/picture/loader.gif}" alt="">
 	  </div> 
-	</div>
+</div>
     <!-- Main Body -->
     <div class="page-wrapper">
         <div th:include="head.html::head-title(${authUser.getUsername()},${authUser.getRole()})"></div>
@@ -41,7 +41,7 @@
                     <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-title-wrapper">
                             <div class="page-title-box ad-title-box-use">
-                                <h4 class="page-title">Groups</h4>
+                                <h4 class="page-title">组管理</h4>
                             </div>
                             <div class="ad-breadcrumb">
                                 <ul>
@@ -58,7 +58,9 @@
 <!--                                    </li>-->
                                     <li>
 										<div class="add-group">
-											<a class="ad-btn" th:href="@{/page/admin/addGroup}">Add Group</a>
+											<a th:href="@{/page/admin/addGroup}">
+                                                <i class="fas fa-sign-out-alt"></i> 增加小组
+                                            </a>
 										</div>
 									</li>
                                 </ul>
@@ -72,7 +74,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card table-card">
                             <div class="card-header pb-0">
-                                <h4>Group List</h4>
+                                <h4 style="text-align:center">小组信息</h4>
                             </div>
                             <div class="card-body">
                                 <div class="chart-holder">
@@ -85,7 +87,7 @@
                                                     <th>组介绍</th>
 													<th>人员管理</th>
 													<th>人员查看</th>
-                                                    <th>Action</th>
+                                                    <th>action</th>
                                                 </tr>
 											<tr></tr>
                                             </thead>

@@ -8,7 +8,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>设备</title>
+    <title>设备管理</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -45,7 +45,7 @@
                 <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-title-wrapper">
                         <div class="page-title-box ad-title-box-use">
-                            <h4 class="page-title">会议室管理系统</h4>
+                            <h4 class="page-title">设备管理</h4>
                         </div>
                         <div class="ad-breadcrumb">
                             <ul>
@@ -53,7 +53,7 @@
                                     <div>
 
                                         <a th:href="@{/page/admin/addDevice}">
-                                            <i class="fas fa-sign-out-alt"></i> 添加设备
+                                            <i class="fas fa-sign-out-alt"></i> 增加设备
                                         </a>
                                     </div>
                                 </li>
@@ -67,7 +67,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card chart-card">
                         <div class="card-header">
-                            <h4>设备</h4>
+                            <h4 style="text-align:center">设备信息</h4>
                         </div>
                         <div class="card-body pb-4">
                             <div class="chart-holder">
@@ -79,7 +79,7 @@
                                             <th>设备名</th>
                                             <th>设备详情</th>
                                             <th>设备数量</th>
-                                            <th>actiom</th>
+                                            <th>action</th>
                                         </tr>
                                         </thead>
                                         <tbody th:each="device : ${devices}">

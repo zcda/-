@@ -22,7 +22,7 @@ Author:
     --main-border-color: #e4e4e4;
     --error: #ff592c;
     --success: #44de4f;
-    --main-color: #11a1fd;
+    --main-color: #4682B4;
     --color1: #efb5a3;
     --color2: #315f72;
 }
@@ -104,7 +104,7 @@ iframe {
     background: #cfecff;
 }
 ::-webkit-scrollbar-thumb {
-    background: #11a1fd;
+    background: #4682B4;
 }
 .ad-btn {
     min-width: 170px;
@@ -193,7 +193,7 @@ iframe {
 }
 
 .ad-auth-img {
-    padding: 0 35px;
+    padding: 0 15px;
 }
 
 .ad-auth-logo {

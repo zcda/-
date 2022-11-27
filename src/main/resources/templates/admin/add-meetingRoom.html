@@ -8,7 +8,7 @@
 <!-- Begin Head -->
 
 <head>
-    <title>SplashDash</title>
+    <title>增加会议室</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
@@ -56,8 +56,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>添加会议室信息</h4>
-                                <p class="card-desc">请在下方输入 <code>会议室名</code>会议室地址 <code>会议室最大容量</code></p>
+                                <h4 style="text-align:center">添加会议室信息</h4>
+                                <p class="card-desc">请在下方输入 <code>会议室名</code> <code>会议室地址</code> <code>会议室最大容量</code></p>
                             </div>
                             <div class="card-body">
                                 <form class="separate-form" method="post" th:action="@{/api/admin/add-MeetingRoom}">
@@ -66,7 +66,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="member-name" class="col-form-label">会议室名</label>
-                                                    <input class="form-control" type="text" placeholder="会议室1"
+                                                    <input class="form-control" type="text" placeholder="请输入会议室名"
                                                            id="member-name" name="name">
                                                 </div>
                                             </div>
@@ -74,19 +74,19 @@
                                                 <div class="form-group">
                                                     <label for="member-email" class="col-form-label">会议室地址</label>
                                                     <input class="form-control" type="text"
-                                                           placeholder="二教101" id="member-email"
+                                                           placeholder="请输入会议室地址" id="member-email"
                                                            name="address">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     <label for="company-name" class="col-form-label">最大容量</label>
-                                                    <input class="form-control" type="text" placeholder="30"
+                                                    <input class="form-control" type="text" placeholder="请输入会议室最大容量"
                                                            id="company-name" name="max_capacity">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group mb-0">
+                                        <div class="form-group mb-0" align="center">
                                             <button class="btn btn-primary" type="submit">提交</button>
                                         </div>
                                     </div>
