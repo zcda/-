@@ -26,3 +26,7 @@ spring:
       ddl-auto: update
   mvc:
     static-path-pattern: /static/**
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
