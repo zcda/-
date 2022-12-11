@@ -27,16 +27,13 @@
                 <div class="header-controls">
                     <div class="user-info-wrapper header-links">
                         <a href="javascript:void(0);" class="user-info">
-                            <img th:src="@{/static/picture/user.jpg}" alt="" class="user-img">
-                            <div class="blink-animation">
-                                <span class="blink-circle"></span>
-                                <span class="main-circle"></span>
-                            </div>
+                            <img th:src="@{/static/picture/userlogo.png}" alt="" class="user-img">
+
                         </a>
                         <div class="user-info-box">
                             <div class="drop-down-header">
                                 <h4 th:text="${username}">管理员名字</h4>
-                                <p th:text="${userType == 'user' ? '学生' : '管理员'}"></p>
+                                <p th:text="${userType == 'user' ? '普通用户' : '管理员'}"></p>
                             </div>
                             <ul>
                                 <li>
@@ -92,12 +89,10 @@
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4"
-                                                                                                   x2="7.5"
-                                                                                                   y2="4.21"></line><path
-                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline
-                                        points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08"
-                                                                                                x2="12" y2="12"></line></svg>
+                                     stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                      <circle cx="9" cy="7" r="4"></circle>
+                                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                             </span>
                         <span class="menu-text">
                                 人员管理
@@ -109,12 +104,10 @@
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4"
-                                                                                                   x2="7.5"
-                                                                                                   y2="4.21"></line><path
-                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline
-                                        points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08"
-                                                                                                x2="12" y2="12"></line></svg>
+                                     stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line>
+                                       <line x1="12" y1="20" x2="12" y2="4"></line>
+                                       <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
                             </span>
                         <span class="menu-text">
                                 组管理
@@ -126,20 +119,18 @@
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4"
-                                                                                                   x2="7.5"
-                                                                                                   y2="4.21"></line><path
-                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline
-                                        points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08"
-                                                                                                x2="12" y2="12"></line></svg>
+                                     stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                       <polyline points="2 17 12 22 22 17"></polyline>
+                                       <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
                             </span>
                         <span class="menu-text">
                                 预定管理
                             </span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('user')">
-                    <a th:href="@{/page/student/index}">
+                <li sec:sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/index}">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -148,12 +139,12 @@
                                         points="9 22 9 12 15 12 15 22"></polyline></svg>
                             </span>
                         <span class="menu-text">
-                                会议室查看
+                                统计信息
                             </span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('user')">
-                    <a th:href="@{/page/student/book}">
+                    <a th:href="@{/page/user/meetingrooms}">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -165,7 +156,52 @@
                                                                                                 x2="12" y2="12"></line></svg>
                             </span>
                         <span class="menu-text">
-                                预定管理
+                                会议室查看
+                            </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/users}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                      <circle cx="9" cy="7" r="4"></circle>
+                                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                        <span class="menu-text">
+                                人员查看
+                            </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/mygroups}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line>
+                                       <line x1="12" y1="20" x2="12" y2="4"></line>
+                                       <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                            </span>
+                        <span class="menu-text">
+                                所在组查看
+                            </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/groups_by_me}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                       <polyline points="2 17 12 22 22 17"></polyline>
+                                       <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
+                            </span>
+                        <span class="menu-text">
+                                我创建的小组
                             </span>
                     </a>
                 </li>

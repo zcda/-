@@ -16,11 +16,11 @@ public class AuthPageController {
     public String register(){
         return  "register";
     }
-    @RequestMapping("logout")
+    @RequestMapping("/logout")
     public String logout(){
         return "login";
     }
-    @RequestMapping("forgot-pws")
+    @RequestMapping("/forgot-pws")
     public String forgetPwd(){
         return "forgot-pws";
     }

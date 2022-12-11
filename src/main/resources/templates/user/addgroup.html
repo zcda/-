@@ -8,8 +8,8 @@
 <!-- Begin Head -->
 
 <head>
-    <title>修改用户详细信息</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>创建小组</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -26,7 +26,6 @@
         alert("输入信息有误")
     </script>
 </head>
-
 <body>
 <div class="loader">
     <div class="spinner">
@@ -44,7 +43,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-title-wrapper">
                         <div class="page-title-box">
-                            <h4 class="page-title">录入用户详细信息</h4>
+                            <h4 class="page-title">录入组信息</h4>
                         </div>
 
                     </div>
@@ -56,40 +55,29 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 style="text-align:center">添加新用户详细信息</h4>
-                                <p class="card-desc">请在下方输入 <code>真实姓名</code> <code>电话</code> <code>性别</code></p>
+                                <h4 style="text-align:center">添加组信息</h4>
+                                <p class="card-desc">请在下方输入 <code>组名</code> <code>组简介</code> </p>
                             </div>
                             <div class="card-body">
-                                <form class="separate-form" method="post" th:action="@{/api/admin/modify_Account_detail}">
+                                <form class="separate-form" method="post" th:action="@{/api/user/add-Group}">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    <label for="member-name" class="col-form-label">真实姓名</label>
-                                                    <input class="form-control" type="text" placeholder="请输入姓名"
-                                                           th:value="${accountDetail.getName()}"
+                                                    <label for="member-name" class="col-form-label">组名</label>
+                                                    <input class="form-control" type="text" placeholder="请输入小组名"
                                                            id="member-name" name="name">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    <label for="member-email" class="col-form-label">电话</label>
+                                                    <label for="member-email" class="col-form-label">详细信息</label>
                                                     <input class="form-control" type="text"
-                                                           placeholder="请输入电话" id="member-email"
-                                                           th:value="${accountDetail.getPhoneNumber()}"
-                                                           name="phone_number">
+                                                           placeholder="请输入该组的详细信息" id="member-email"
+                                                           name="details">
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                                <label for="member-name" class="col-form-label">性别</label>
-                                                <select class="select2 form-control" id="region1" name="sex">
-                                                    <optgroup >
-                                                        <option >男</option>
-                                                        <option >女</option>
-                                                    </optgroup>
 
-                                                </select>
-                                            </div>
                                         </div>
                                         <div class="form-group mb-0" align="center">
                                             <button class="effect-btn btn btn-info squer-btn mt-2 mr-2" type="submit">提交</button>
@@ -124,5 +112,4 @@
 <!-- Custom Script -->
 <script th:src="@{/static/js/custom.js}"></script>
 </body>
-
 </html>

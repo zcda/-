@@ -45,9 +45,9 @@
                         <div class="breadcrumb-list">
                             <ul>
                                 <li class="breadcrumb-link">
-                                    <a href="javascript:void(0);"><i class="fas fa-home mr-2"></i>智能会议室管理系统</a>
+                                    <a href="javascript:void(0);"><i class="fas fa-home mr-2"></i>会议室管理系统</a>
                                 </li>
-                                <li class="breadcrumb-link active">管理员主页</li>
+                                <li class="breadcrumb-link active">普通用户主页</li>
                             </ul>
                         </div>
                     </div>
@@ -141,8 +141,8 @@
                                     </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">当前已注册学生数量</h5>
-                                <h4 class="ad-card-title" >66k</h4>
+                                <h5 class="ad-title">当前已注册用户数量</h5>
+                                <h4 class="ad-card-title" th:text="${UserCount}">66k</h4>
                             </div>
                         </div>
                     </div>
@@ -159,8 +159,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">当前的书籍数量</h5>
-                                <h4 class="ad-card-title" >15k</h4>
+                                <h5 class="ad-title">当前的会议室数量</h5>
+                                <h4 class="ad-card-title" th:text="${MeetingRoomCount}">15k</h4>
                             </div>
                         </div>
                     </div>
@@ -181,8 +181,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">当前的借阅总数</h5>
-                                <h4 class="ad-card-title" >420k</h4>
+                                <h5 class="ad-title">当前的所在组总数</h5>
+                                <h4 class="ad-card-title" th:text="${MygroupCount}">?</h4>
                             </div>
                         </div>
                     </div>
@@ -206,8 +206,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">图书馆总营收</h5>
-                                <h4 class="ad-card-title">1.0$</h4>
+                                <h5 class="ad-title">所在组总预定数</h5>
+                                <h4 class="ad-card-title" th:text="${RecordCount}">?</h4>
                             </div>
                         </div>
                     </div>
@@ -215,39 +215,7 @@
             </div>
             <!-- Revanue Status Start -->
             <!-- Products Orders Start -->
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="card chart-card">
-                        <div class="card-header">
-                            <h4>Newest Orders</h4>
-                        </div>
-                        <div class="card-body pb-4">
-                            <div class="chart-holder">
-                                <div class="table-responsive">
-                                    <table class="table table-styled mb-0">
-                                        <thead>
-                                        <tr>
-                                            <th>借阅 ID</th>
-                                            <th>借阅人</th>
-                                            <th>借阅书籍</th>
-                                            <th>借阅时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody >
-                                        <tr>
-                                            <td >#JH2033</td>
-                                            <td >#JH2033</td>
-                                            <td >#JH2033</td>
-                                            <td >#JH2033</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
