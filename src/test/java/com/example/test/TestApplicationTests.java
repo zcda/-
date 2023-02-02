@@ -54,8 +54,6 @@ class TestApplicationTests {
     @Transactional
     @Commit
     public void test(){
-        Group group=groupRepository.findById(3).get();
-        System.out.println(recordRepository.findAllByGroup(group).size());
     }
 
 }
