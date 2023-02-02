@@ -4,8 +4,11 @@ package com.example.test.controller;
 import com.example.test.Service.AccountService;
 import com.example.test.Service.AdminService;
 import com.example.test.Service.UserService;
+import com.example.test.enetiy.Group;
+import com.example.test.enetiy.Record;
 import com.example.test.enetiy.Users;
 import com.example.test.repo.AccountRepository;
+import com.example.test.repo.RecordRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/page/user")
@@ -28,8 +33,11 @@ public class UserPageController {
     @Resource
     AdminService adminService;
 
-    //@Resource
-    //UserService userService;
+    @Resource
+    UserService userService;
+
+    @Resource
+    RecordRepository recordRepository;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
@@ -37,8 +45,8 @@ public class UserPageController {
         model.addAttribute("meetingRoomsCount",adminService.getAllMeetingRoomCounts());
         model.addAttribute("UserCount",adminService.UserCount());
         model.addAttribute("MeetingRoomCount",adminService.MeetingRoomCount());
-        //model.addAttribute("MygroupCount",userSrevice.MygroupCount());
-        //model.addAttribute("RecordCount",userSrevice.RecordofmygroupCount());
+        model.addAttribute("MygroupCount",userService.MygroupCount(accountService.findUser(session).getAccountDetail().getUid()));
+        model.addAttribute("RecordCount",userService.RecordofmygroupCount(accountService.findUser(session).getAccountDetail().getUid()));
         return "user/index";
     }
 
@@ -85,7 +93,7 @@ public class UserPageController {
     @RequestMapping("/mygroups")
     public String mygroups(HttpSession session, Model model){
         model.addAttribute("authUser",accountService.findUser(session));
-        //model.addAttribute("groups",userService.getmyGroups(uid));
+        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
 
         return "user/mygroup";
     }
@@ -99,10 +107,10 @@ public class UserPageController {
         return "user/user_in_group";
     }
 
-    @RequestMapping("/records_of_group/{gid}")
+    @RequestMapping("/record_of_group/{gid}")
     public String records_of_group(HttpSession session, Model model, @PathVariable int gid){
         model.addAttribute("authUser",accountService.findUser(session));
-        //model.addAttribute("records",userService.findAllRecordByGid(gid));
+        model.addAttribute("records",userService.findAllRecordByGid(gid));
         session.setAttribute("gid",gid);
         return "user/record_of_group";
     }
@@ -110,7 +118,8 @@ public class UserPageController {
     @RequestMapping("/groups_by_me")
     public String group_by_me(HttpSession session, Model model){
         model.addAttribute("authUser",accountService.findUser(session));
-        //model.addAttribute("groups",userService.getGroupsbyme(uid));
+        model.addAttribute("groups",adminService.getAllGroups());
+        model.addAttribute("myGroups",userService.getGroupsbyme(accountService.findUser(session).getAccountDetail().getUid()));
         return "user/group_by_me";
     }
 
@@ -138,8 +147,34 @@ public class UserPageController {
         session.setAttribute("gid",gid);
         return "user/modify_group";
     }
-
-
-
+    @RequestMapping("/borrows")
+    public String borrows(HttpSession session, Model model){
+        model.addAttribute("authUser",accountService.findUser(session));
+        List<Record> records = new LinkedList<>();
+        userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()).forEach(group -> {
+            records.addAll(recordRepository.findAllByGroup(group));
+        });
+        model.addAttribute("recordsOfMine",records);
+        model.addAttribute("records",adminService.getAllRecord());
+        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+        return "user/borrows";
+    }
+    @RequestMapping("/addBorrow")
+    public String addBorrow(HttpSession session, Model model){
+        model.addAttribute("authUser",accountService.findUser(session));
+        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+        model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+        model.addAttribute("fail",false);
+        return "user/add-borrow";
+    }
+    @RequestMapping("/myinfo")
+    public String myinfo(HttpSession session, Model model){
+        model.addAttribute("authUser",accountService.findUser(session));
+        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+        model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+        model.addAttribute("accountDetail",adminService.findUsersByUid(accountService.findUser(session).getAccountDetail().getUid()));
+        model.addAttribute("fail",false);
+        return "user/myinfo";
+    }
 
 }

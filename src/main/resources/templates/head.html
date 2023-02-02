@@ -36,6 +36,15 @@
                                 <p th:text="${userType == 'user' ? '普通用户' : '管理员'}"></p>
                             </div>
                             <ul>
+                                <li sec:authorize="hasRole('user')">
+                                    <a th:href="@{/page/user/myinfo}">
+                                        <span class="menu-text">
+                                            我的信息
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul>
                                 <li>
                                     <a th:href="@{/login}">
                                         <i class="fas fa-sign-out-alt"></i> 退出登录
@@ -52,7 +61,8 @@
     <aside class="sidebar-wrapper">
         <div class="side-menu-wrap">
             <ul class="main-menu">
-                <li sec:sec:authorize="hasRole('admin')">
+
+                <li sec:authorize="hasRole('admin')">
                     <a th:href="@{/page/admin/index}">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
@@ -129,7 +139,7 @@
                             </span>
                     </a>
                 </li>
-                <li sec:sec:authorize="hasRole('user')">
+                <li sec:authorize="hasRole('user')">
                     <a th:href="@{/page/user/index}">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
@@ -161,6 +171,21 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('user')">
+                    <a th:href="@{/page/user/borrows}">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                       <polyline points="2 17 12 22 22 17"></polyline>
+                                       <polyline points="2 12 12 17 22 12"></polyline>
+                                </svg>
+                            </span>
+                        <span class="menu-text">
+                                预定查看
+                            </span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('user')">
                     <a th:href="@{/page/user/users}">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
@@ -175,21 +200,7 @@
                             </span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('user')">
-                    <a th:href="@{/page/user/mygroups}">
-                            <span class="icon-menu feather-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line>
-                                       <line x1="12" y1="20" x2="12" y2="4"></line>
-                                       <line x1="6" y1="20" x2="6" y2="14"></line>
-                                </svg>
-                            </span>
-                        <span class="menu-text">
-                                所在组查看
-                            </span>
-                    </a>
-                </li>
+
                 <li sec:authorize="hasRole('user')">
                     <a th:href="@{/page/user/groups_by_me}">
                             <span class="icon-menu feather-icon">
@@ -201,7 +212,7 @@
                                 </svg>
                             </span>
                         <span class="menu-text">
-                                我创建的小组
+                                小组查看
                             </span>
                     </a>
                 </li>

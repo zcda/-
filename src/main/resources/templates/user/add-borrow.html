@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>添加预定信息</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/fonts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/icofont.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+    <link rel="stylesheet" id="theme-change" type="text/css" href="">
+    <script th:if="${fail}==true">
+        alert("输入信息有误")
+    </script>
+</head>
+
+<body>
+<div class="loader">
+    <div class="spinner">
+        <img th:src="@{/static/picture/loader.gif}" alt="">
+    </div>
+</div>
+<!-- Main Body -->
+<div class="page-wrapper">
+    <div th:include="head.html::head-title(${authUser.getUsername()},${authUser.getRole()})"></div>
+    <div class="page-wrapper">
+
+        <div class="main-content">
+            <!-- Page Title Start -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-box">
+                            <h4 class="page-title">录入预定信息</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- From Start -->
+            <div class="from-wrapper">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="text-align:center">添加预定信息</h4>
+                                <p class="card-desc">请在下方输入 <code>组</code> <code>会议室</code> <code>会议名</code> <code>开始时间</code> <code>结束时间</code> </p>
+                            </div>
+                            <div class="card-body">
+
+                                <form class="separate-form" method="post" th:action="@{/api/user/add-Borrow}">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <label for="member-name" class="col-form-label">组</label>
+                                            <select class="select2 form-control" id="region" name="gid">
+                                                <optgroup label="需要选定的组">
+                                                    <option th:text="${group.getName()}" th:value="${group.getGid()}" th:each="group : ${groups}">Alaska</option>
+                                                </optgroup>
+
+                                            </select>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <label for="member-name" class="col-form-label">会议室</label>
+                                                <select class="select2 form-control" id="region1" name="rid">
+                                                    <optgroup label="需要选定的会议室">
+                                                        <option th:text="${meetingRoom.getName()}" th:value="${meetingRoom.getRID()}" th:each="meetingRoom : ${meetingRooms}">Alaska</option>
+                                                    </optgroup>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="member-name" class="col-form-label">会议名</label>
+                                                    <input class="form-control" type="text" placeholder="请输入会议名"
+                                                           id="member-name" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="member-email" class="col-form-label">开始时间</label>
+                                                    <input class="form-control" type="datetime-local"
+                                                           id="member-email"
+                                                           name="startTime">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="company-name" class="col-form-label">结束时间</label>
+                                                    <input class="form-control" type="datetime-local"
+                                                           id="company-name" name="endTime">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0" align="center">
+                                            <button class="effect-btn btn btn-info squer-btn mt-2 mr-2" type="submit">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="ad-footer-btm">
+                <p>Copyright © 2021.Company name All rights reserved.<a target="_blank"
+                                                                        href="https://sc.chinaz.com/moban/">网页模板</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script Start -->
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/popper.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/swiper.min.js}"></script>
+<script th:src="@{/static/js/apexcharts.min.js}"></script>
+<script th:src="@{/static/js/control-chart-apexcharts.js}"></script>
+<!-- Page Specific -->
+<script th:src="@{/static/js/nice-select.min.js}"></script>
+<!-- Custom Script -->
+<script th:src="@{/static/js/custom.js}"></script>
+</body>
+
+</html>

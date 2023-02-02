@@ -1,6 +1,7 @@
 package com.example.test;
 
 import com.example.test.Service.AdminService;
+import com.example.test.enetiy.Group;
 import com.example.test.repo.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,8 @@ class TestApplicationTests {
     UserRepository userRepository;
     @Resource
     GroupRepository groupRepository;
+    @Resource
+    RecordRepository recordRepository;
 
     @Resource
     AdminService service;
@@ -51,8 +54,8 @@ class TestApplicationTests {
     @Transactional
     @Commit
     public void test(){
-
-        System.out.println(meetingRoomRepository.findAll().size());
+        Group group=groupRepository.findById(3).get();
+        System.out.println(recordRepository.findAllByGroup(group).size());
     }
 
 }
