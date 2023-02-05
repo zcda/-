@@ -2,6 +2,7 @@ package com.example.test.controller.api;
 
 import com.example.test.Service.AccountService;
 import com.example.test.Service.AdminService;
+import com.example.test.Service.VerifyService;
 import com.example.test.repo.AccountRepository;
 import lombok.SneakyThrows;
 import org.apache.ibatis.annotations.Param;
@@ -27,6 +28,9 @@ public class AdminApiController {
 
     @Resource
     AccountService accountService;
+
+    @Resource
+    VerifyService verifyService;
 
 
     @RequestMapping("/deleteMeetingRoom/{rid}")
@@ -165,6 +169,7 @@ public class AdminApiController {
             Date end=ft.parse(endTime.replace("T"," "));
 
             if (service.addBorrow(Integer.parseInt(rid),Integer.parseInt(gid),name,start,end)){
+                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),start,end);
                 return "redirect:/page/admin/borrows";
             }else{
                 model.addAttribute("authUser",accountService.findUser(session));
