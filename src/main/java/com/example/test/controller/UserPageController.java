@@ -42,6 +42,7 @@ public class UserPageController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
         model.addAttribute("authUser",accountService.findUser(session));
+        model.addAttribute("meetingRoomsName",adminService.getAllMeetingRoomsName());
         model.addAttribute("meetingRoomsCount",adminService.getAllMeetingRoomCounts());
         model.addAttribute("UserCount",adminService.UserCount());
         model.addAttribute("MeetingRoomCount",adminService.MeetingRoomCount());

@@ -125,7 +125,7 @@ public class VerifyServiceImpl implements VerifyService {
                 //设置邮件标题
                 message.setSubject("您有一个新会议需要参加！");
                 //设置邮件内容
-                message.setText("  您将在"+meetingRoom.getName()+",具体地点为"+meetingRoom.getAddress()+",有一场名为"+name+"的会议！"+"                                " +
+                message.setText("  您将在 "+meetingRoom.getName()+" ,具体地点为 "+meetingRoom.getAddress()+" ,有一场名为 "+name+" 的会议！"+"                                " +
                         ""+"时间为"+startTime+"到"+endTime);
                 //设置邮件发送给谁，可以多个，这里就发给你的QQ邮箱
                 message.setTo(account.getEmail());
