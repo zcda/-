@@ -83,7 +83,7 @@
                                             <th>组名</th>
                                             <th>组介绍</th>
                                             <th>人员查看</th>
-                                            <th>人员管理</th>
+                                            <th>加入该组</th>
                                         </tr>
                                         <tr></tr>
                                         </thead>
@@ -108,7 +108,7 @@
                                                 </a>
                                             </td>
                                             <td class="relative">
-                                                <a class="action-btn" th:href="@{/page/user/group_user_manage/{gid}(gid=${group.getGid()})}">
+                                                <a class="action-btn" th:href="@{/api/user/userInGroup/{gid}(gid=${group.getGid()})}">
                                                     <svg class="default-size " viewBox="0 0 341.333 341.333 ">
                                                         <g>
                                                             <g>
@@ -122,6 +122,7 @@
                                                     </svg>
                                                 </a>
                                             </td>
+
 
                                         </tr>
                                         </tbody>
@@ -152,7 +153,7 @@
                                             <th>组名</th>
                                             <th>组介绍</th>
                                             <th>人员查看</th>
-                                            <th>人员管理</th>
+                                            <th>退出该组</th>
                                         </tr>
                                         <tr></tr>
                                         </thead>
@@ -177,7 +178,7 @@
                                                 </a>
                                             </td>
                                             <td class="relative">
-                                                <a class="action-btn" th:href="@{/page/user/group_user_manage/{gid}(gid=${mgroup.getGid()})}">
+                                                <a class="action-btn" th:href="@{/api/user/userOutGroup/{gid}(gid=${mgroup.getGid()})}">
                                                     <svg class="default-size " viewBox="0 0 341.333 341.333 ">
                                                         <g>
                                                             <g>

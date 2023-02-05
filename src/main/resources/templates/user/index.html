@@ -212,9 +212,91 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
             <!-- Revanue Status Start -->
             <!-- Products Orders Start -->
+            <div id="container" style="height: 250%" ></div>
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-nightly@5.5.0-dev.20221114/dist/echarts.min.js"></script>
+            <!-- Uncomment this line if you want to dataTool extension
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-nightly@5.5.0-dev.20221114/dist/extension/dataTool.min.js"></script>
+            -->
+            <!-- Uncomment this line if you want to use gl extension
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+            -->
+            <!-- Uncomment this line if you want to echarts-stat extension
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+            -->
+            <!-- Uncomment this line if you want to use map
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+            -->
+            <!-- Uncomment these two lines if you want to use bmap extension
+            <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+            <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-nightly@5.5.0-dev.20221114/dist/extension/bmap.min.js"></script>
+            -->
+
+            <script type="text/javascript" th:inline="javascript">
+                var dom = document.getElementById('container');
+                var myChart = echarts.init(dom, null, {
+                    renderer: 'canvas',
+                    useDirtyRect: false
+                });
+                var app = {};
+
+                var option;
+
+                option = {
+                    title:{
+                        text:'被访问次数表',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '10%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            name:'会议室名',
+                            type: 'category',
+                            data: [[${meetingRoomsName}]],
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            name:'次数',
+                            minInterval: 1,
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '被访问次数',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: [[${meetingRoomsCount}]]
+                        }
+                    ]
+                };
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+
+                window.addEventListener('resize', myChart.resize);
+            </script>
 
         </div>
     </div>

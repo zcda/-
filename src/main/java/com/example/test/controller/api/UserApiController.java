@@ -3,6 +3,7 @@ package com.example.test.controller.api;
 import com.example.test.Service.AccountService;
 import com.example.test.Service.AdminService;
 import com.example.test.Service.UserService;
+import com.example.test.Service.VerifyService;
 import com.example.test.repo.AccountRepository;
 import lombok.SneakyThrows;
 import org.apache.ibatis.annotations.Param;
@@ -33,6 +34,9 @@ public class UserApiController {
     @Resource
     AccountService accountService;
 
+    @Resource
+    VerifyService verifyService;
+
     @RequestMapping("/delete_group/{gid}")
     public String delete_group(@PathVariable int gid, HttpSession session){
         userService.deleteGroupbyme(gid);
@@ -45,10 +49,22 @@ public class UserApiController {
         return "redirect:/page/user/group_user_manage/"+ (Integer) session.getAttribute("gid");
     }
 
+    @RequestMapping("/userOutGroup/{gid}")
+    public String userOutGroup(@PathVariable int gid,HttpSession session){
+        adminService.deleteUserInGroup(gid,accountService.findUser(session).getAccountDetail().getUid());
+        return "redirect:/page/user/groups_by_me";
+    }
+
     @RequestMapping("/users_group_add/{uid}")
     public String users_group_add(@PathVariable int uid,HttpSession session){
         adminService.addUserInGroup((Integer) session.getAttribute("gid"),uid);
         return "redirect:/page/user/group_user_manage/"+ (Integer) session.getAttribute("gid");
+    }
+
+    @RequestMapping("/userInGroup/{gid}")
+    public String userInGroup(@PathVariable int gid,HttpSession session){
+        adminService.addUserInGroup(gid,accountService.findUser(session).getAccountDetail().getUid());
+        return "redirect:/page/user/groups_by_me";
     }
 
     @RequestMapping("/add-Group")
@@ -112,6 +128,7 @@ public class UserApiController {
             Date end=ft.parse(endTime.replace("T"," "));
 
             if (adminService.addBorrow(Integer.parseInt(rid),Integer.parseInt(gid),name,start,end)){
+                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),start,end);
                 return "redirect:/page/user/borrows";
             }else{
                 model.addAttribute("authUser",accountService.findUser(session));

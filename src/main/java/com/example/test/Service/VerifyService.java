@@ -1,6 +1,8 @@
 package com.example.test.Service;
 
 
+import java.util.Date;
+
 public interface VerifyService {
      boolean SentVerifyCode(String mail);
 
@@ -8,7 +10,5 @@ public interface VerifyService {
 
      boolean doVerify(String mail,String code);
 
-     boolean sendMail(String name, int rid, int gid, String startTime,String endTime);
-
-     boolean checkEmail(String email);
+     boolean sendMail(String name, int rid, int gid, Date startTime,Date endTime);
 }
