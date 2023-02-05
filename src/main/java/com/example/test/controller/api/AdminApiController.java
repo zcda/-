@@ -2,6 +2,7 @@ package com.example.test.controller.api;
 
 import com.example.test.Service.AccountService;
 import com.example.test.Service.AdminService;
+import com.example.test.Service.VerifyService;
 import com.example.test.repo.AccountRepository;
 import lombok.SneakyThrows;
 import org.apache.ibatis.annotations.Param;
@@ -27,6 +28,9 @@ public class AdminApiController {
 
     @Resource
     AccountService accountService;
+
+    @Resource
+    VerifyService verifyService;
 
 
     @RequestMapping("/deleteMeetingRoom/{rid}")
@@ -95,7 +99,7 @@ public class AdminApiController {
     public String addAccount(@Param("name")String name, @Param("password")String password, @Param("email")String email, HttpSession session,Model model){
 
 
-        if(name==""||password==""||email==""){
+        if(name==""||password==""||email==""||verifyService.checkEmail(email)){
             model.addAttribute("authUser",accountService.findUser(session));
             model.addAttribute("fail",true);
             return "admin/add-account";
@@ -165,6 +169,7 @@ public class AdminApiController {
             Date end=ft.parse(endTime.replace("T"," "));
 
             if (service.addBorrow(Integer.parseInt(rid),Integer.parseInt(gid),name,start,end)){
+                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),startTime,endTime);
                 return "redirect:/page/admin/borrows";
             }else{
                 model.addAttribute("authUser",accountService.findUser(session));
@@ -279,7 +284,7 @@ public class AdminApiController {
     public String modify_Account(HttpSession session,Model model, @Param("name")String name, @Param("password") String password,@Param("email")String email){
 
 
-        if (name==""||password==""||email==""){
+        if (name==""||password==""||email==""||verifyService.checkEmail(email)){
             model.addAttribute("authUser",accountService.findUser(session));
             model.addAttribute("account",repository.findById((Integer)session.getAttribute("id")).get());
             model.addAttribute("fail",true);
