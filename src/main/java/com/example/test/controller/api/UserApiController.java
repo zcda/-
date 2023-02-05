@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -128,7 +127,7 @@ public class UserApiController {
             Date end=ft.parse(endTime.replace("T"," "));
 
             if (adminService.addBorrow(Integer.parseInt(rid),Integer.parseInt(gid),name,start,end)){
-                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),start,end);
+                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),startTime.replace("T"," "),endTime.replace("T"," "));
                 return "redirect:/page/user/borrows";
             }else{
                 model.addAttribute("authUser",accountService.findUser(session));
