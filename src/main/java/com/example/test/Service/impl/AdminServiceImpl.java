@@ -230,6 +230,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteAccount(int id) {
+        deleteUser(accountRepository.findById(id).get().getAccountDetail().getUid(),id);
         accountRepository.deleteById(id);
     }
 

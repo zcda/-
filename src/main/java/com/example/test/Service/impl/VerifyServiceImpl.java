@@ -99,10 +99,6 @@ public class VerifyServiceImpl implements VerifyService {
         }
     }
 
-
-
-
-
     @Override
     public boolean doVerify(String mail, String code) {
         String string=template.opsForValue().get("verify:code:"+mail);
@@ -110,7 +106,6 @@ public class VerifyServiceImpl implements VerifyService {
         template.delete("verify:code:"+mail);
         return true;
     }
-
     @Override
     public boolean sendMail(String name, int rid, int gid, String startTime, String endTime) {
         Group group=groupRepository.findById(gid).get();
@@ -141,7 +136,6 @@ public class VerifyServiceImpl implements VerifyService {
         }
         return true;
     }
-
     @Override
     public boolean checkEmail(String email) {
         if (!email.matches("[/w/./-]+@([/w/-]+/.)+[/w/-]+")) {
@@ -187,6 +181,5 @@ public class VerifyServiceImpl implements VerifyService {
             }
         }
         return false;
-
     }
 }
