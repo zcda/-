@@ -15,7 +15,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.xbill.DNS.Lookup;
 import org.xbill.DNS.Record;
 import org.xbill.DNS.Type;
 
@@ -138,37 +137,63 @@ public class VerifyServiceImpl implements VerifyService {
     }
     @Override
     public boolean checkEmail(String email) {
-        if (!email.matches("[/w/./-]+@([/w/-]+/.)+[/w/-]+")) {
+        if (!email.matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+")) {
             return false;
         }
+        String log = "";
         String host = "";
-        String hostName = email.split("@")[1];
+        String hostName = email.split("@")[1];// 去掉@后面的
+        //输出邮箱域名
+        System.out.println("hostName:" + hostName);
         Record[] result = null;
         SMTPClient client = new SMTPClient();
+        //设置超时时间
+        client.setConnectTimeout(8000);
         try {
-            // 查找MX记录
-            Lookup lookup = new Lookup(hostName, Type.MX);
+            // 查找DN的SMX记录
+            org.xbill.DNS.Lookup lookup = new org.xbill.DNS.Lookup(hostName, Type.MX);
             lookup.run();
-            if (lookup.getResult() != Lookup.SUCCESSFUL) {
+            if (lookup.getResult() != org.xbill.DNS.Lookup.SUCCESSFUL) {
+                System.out.println("找不到MX记录");
                 return false;
             } else {
                 result = lookup.getAnswers();
+                //循环打印DNS服务器
+                for (int i = 0; i < result.length; i++) {
+                    System.out.println(result[i].getAdditionalName().toString());
+                }
             }
-            // 连接到邮箱服务器
+            // 循环连接到邮箱DNS服务器
             for (int i = 0; i < result.length; i++) {
                 host = result[i].getAdditionalName().toString();
-                client.connect(host);
+                //IP地址
+                //System.out.println("ip:"+InetAddress.getByName(host).getHostAddress());
+                int count=0;
+                try {
+                    client.connect(host);//捕获超时异常
+                } catch (Exception e) {
+                    count++;
+                    //
+                    if(count>=result.length){
+                        return false;
+                    }
+                }
                 if (!SMTPReply.isPositiveCompletion(client.getReplyCode())) {
                     client.disconnect();
                     continue;
                 } else {
+                    log += "邮箱mx记录" + hostName + "存在";
+                    log += "成功连接到" + host;
                     break;
                 }
             }
-            //以下2项自己填写快速的，有效的邮箱
-            client.login("qq.com");
-            client.setSender("2864923483@qq.com");
-            client.addRecipient(email);
+            client.login("163.com");
+            client.setSender("www.linuxidc.com@linuxidc.com");// 发件人
+            log += "=" + client.getReplyString();
+            client.addRecipient(email);//发送邮件测试邮箱地址是否存在
+            log += "\n";
+            log += "=" + client.getReplyString();
+            System.out.println(log+"  code"+client.getReplyCode());
             if (250 == client.getReplyCode()) {
                 return true;
             }
@@ -179,7 +204,9 @@ public class VerifyServiceImpl implements VerifyService {
                 client.disconnect();
             } catch (IOException e) {
             }
+
         }
         return false;
+
     }
 }
