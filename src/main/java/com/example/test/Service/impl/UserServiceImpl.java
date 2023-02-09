@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public int MygroupCount(int uid) {
         Users users=userRepository.findById(uid).get();
+        if(users.getGroup()==null) return 0;
         Set<Group> groups =  users.getGroup();
         return groups.size();
     }
@@ -73,6 +74,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public int RecordofmygroupCount(int uid) {
         Users users=userRepository.findById(uid).get();
+        if(users.getGroup()==null) return 0;
         Set<Group> groups =  users.getGroup();
         AtomicInteger a = new AtomicInteger();
         groups.forEach(group -> {

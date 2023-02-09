@@ -1,6 +1,7 @@
 package com.example.test.config;
 
 
+import com.example.test.Service.AccountService;
 import com.example.test.Service.impl.AuthService;
 import com.example.test.enetiy.Account;
 import com.example.test.repo.AccountRepository;
@@ -35,6 +36,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Resource
     AccountRepository accountRepository;
+
+    @Resource
+    AccountService accountService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -77,7 +81,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         if (user.getRole().equals("admin")) {
             httpServletResponse.sendRedirect("page/admin/index");
         } else {
-            httpServletResponse.sendRedirect("page/user/index");
+            if(accountService.findUser(session).getAccountDetail()==null){
+                httpServletResponse.sendRedirect("page/user/addaccount_detail");
+            }else {
+                httpServletResponse.sendRedirect("page/user/index");
+            }
         }
     }
 

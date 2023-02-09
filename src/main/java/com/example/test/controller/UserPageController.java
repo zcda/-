@@ -4,7 +4,6 @@ package com.example.test.controller;
 import com.example.test.Service.AccountService;
 import com.example.test.Service.AdminService;
 import com.example.test.Service.UserService;
-import com.example.test.enetiy.Group;
 import com.example.test.enetiy.Record;
 import com.example.test.enetiy.Users;
 import com.example.test.repo.AccountRepository;
@@ -49,6 +48,13 @@ public class UserPageController {
         model.addAttribute("MygroupCount",userService.MygroupCount(accountService.findUser(session).getAccountDetail().getUid()));
         model.addAttribute("RecordCount",userService.RecordofmygroupCount(accountService.findUser(session).getAccountDetail().getUid()));
         return "user/index";
+    }
+
+    @RequestMapping(value = "/addaccount_detail")
+    public String addaccount_detail(HttpSession session, Model model){
+        model.addAttribute("authUser",accountService.findUser(session));
+        model.addAttribute("fail",false);
+        return "user/addaccount_detail";
     }
 
     @RequestMapping(value = "/meetingrooms" ,method = RequestMethod.GET)
@@ -171,8 +177,8 @@ public class UserPageController {
     @RequestMapping("/myinfo")
     public String myinfo(HttpSession session, Model model){
         model.addAttribute("authUser",accountService.findUser(session));
-        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
-        model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+//        model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+//        model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
         model.addAttribute("accountDetail",adminService.findUsersByUid(accountService.findUser(session).getAccountDetail().getUid()));
         model.addAttribute("fail",false);
         return "user/myinfo";

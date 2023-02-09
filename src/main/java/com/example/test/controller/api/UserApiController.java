@@ -127,6 +127,7 @@ public class UserApiController {
             Date end=ft.parse(endTime.replace("T"," "));
 
             if (adminService.addBorrow(Integer.parseInt(rid),Integer.parseInt(gid),name,start,end)){
+//                verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),start,end);
                 verifyService.sendMail(name,Integer.parseInt(rid),Integer.parseInt(gid),startTime.replace("T"," "),endTime.replace("T"," "));
                 return "redirect:/page/user/borrows";
             }else{
@@ -159,8 +160,8 @@ public class UserApiController {
 
         if (name==""||phone_number==""||(!sex.equals("女")&&!sex.equals("男"))){
             model.addAttribute("authUser",accountService.findUser(session));
-            model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
-            model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+//            model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+//            model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
             model.addAttribute("accountDetail",adminService.findUsersByUid(accountService.findUser(session).getAccountDetail().getUid()));
             model.addAttribute("fail",false);
             return "user/myinfo";
@@ -170,11 +171,29 @@ public class UserApiController {
             return "redirect:/page/user/myinfo";
         }catch (Exception e){
             model.addAttribute("authUser",accountService.findUser(session));
-            model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
-            model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
+//            model.addAttribute("groups",userService.getmyGroups(accountService.findUser(session).getAccountDetail().getUid()));
+//            model.addAttribute("meetingRooms",adminService.getAllMeetingRooms());
             model.addAttribute("accountDetail",adminService.findUsersByUid(accountService.findUser(session).getAccountDetail().getUid()));
             model.addAttribute("fail",false);
             return "user/myinfo";
+        }
+    }
+    @RequestMapping("/add-Account_detail")
+    public String addAccountDetail(Model model,@Param("name")String name, @Param("phone_number")String phone_number, @Param("sex")String sex, HttpSession session){
+
+
+        if (name==""||phone_number==""||(!sex.equals("女")&&!sex.equals("男"))){
+            model.addAttribute("authUser",accountService.findUser(session));
+            model.addAttribute("fail",true);
+            return "user/addaccount_detail";
+        }
+        try{
+            adminService.addAccountDetail(accountService.findUser(session).getID(),name,phone_number,sex);
+            return "redirect:/login";
+        }catch (Exception e){
+            model.addAttribute("authUser",accountService.findUser(session));
+            model.addAttribute("fail",true);
+            return "user/addaccount_detail";
         }
     }
 }
